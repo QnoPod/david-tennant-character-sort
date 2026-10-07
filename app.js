@@ -661,19 +661,34 @@ function buildFinalRanking(finalists) {
 function renderResult() {
   const box=$("ranking");
   box.innerHTML="";
-  state.result.forEach((c,i)=>{
+
+  // スクショ風：4・5・6 / 2・1・3 / 7・8・9
+  const displayOrder=[3,4,5,1,0,2,6,7,8];
+
+  displayOrder.forEach(resultIndex=>{
+    const c=state.result[resultIndex];
+    if(!c) return;
+
+    const rank=resultIndex+1;
     const el=document.createElement("article");
-    el.className="rank";
-    const work=c.work ? `<div class="rank-work">${escapeHtml(c.work)}</div>` : "";
+    el.className=`rank rank-${rank}`;
+    el.dataset.rank=String(rank);
+
+    const work=c.work
+      ? `<div class="rank-work">${escapeHtml(c.work)}</div>`
+      : "";
+
     el.innerHTML=`
-      <div class="rank-badge">${i+1}</div>
+      <div class="rank-badge">${rank}位</div>
       <div class="rank-media">${imageMarkup(c)}</div>
       <div class="rank-body">
         <div class="rank-name">${escapeHtml(c.name)}</div>
         ${work}
       </div>`;
+
     box.appendChild(el);
   });
+
   show("result");
 }
 
@@ -741,8 +756,13 @@ async function createResultBlob() {
   ctx.fillStyle="#6b7280"; ctx.font="400 25px sans-serif";
   ctx.fillText("デイヴィッド・テナント キャラクター 推し9選",72,198);
 
-  for(let i=0;i<state.result.length;i++){
-    const c=state.result[i];
+  const displayOrder=[3,4,5,1,0,2,6,7,8];
+
+  for(let i=0;i<displayOrder.length;i++){
+    const resultIndex=displayOrder[i];
+    const c=state.result[resultIndex];
+    if(!c) continue;
+    const rank=resultIndex+1;
     const row=Math.floor(i/3),col=i%3;
     const x=margin+col*(cell+gap);
     const y=top+row*(imgH+labelH+gap);
@@ -758,9 +778,29 @@ async function createResultBlob() {
       ctx.textAlign="left"; ctx.textBaseline="alphabetic";
     }
 
-    ctx.fillStyle="rgba(17,24,39,.88)"; ctx.fillRect(x+10,y+10,54,54);
-    ctx.fillStyle="#fff"; ctx.textAlign="center"; ctx.textBaseline="middle";
-    ctx.font="800 28px sans-serif"; ctx.fillText(String(i+1),x+37,y+37);
+    if(rank===1){
+      const badgeGrad=ctx.createLinearGradient(x+10,y+10,x+78,y+10);
+      badgeGrad.addColorStop(0,"#8b5cf6");
+      badgeGrad.addColorStop(1,"#ec4899");
+      ctx.fillStyle=badgeGrad;
+    }else if(rank===2){
+      ctx.fillStyle="#5f82d9";
+    }else{
+      ctx.fillStyle="#fff";
+    }
+
+    ctx.beginPath();
+    if(ctx.roundRect){
+      ctx.roundRect(x+10,y+10,68,48,24);
+    }else{
+      ctx.rect(x+10,y+10,68,48);
+    }
+    ctx.fill();
+
+    ctx.fillStyle=rank<=2 ? "#fff" : "#111827";
+    ctx.textAlign="center"; ctx.textBaseline="middle";
+    ctx.font="800 22px sans-serif";
+    ctx.fillText(`${rank}位`,x+44,y+34);
     ctx.textAlign="left"; ctx.textBaseline="alphabetic";
 
     ctx.fillStyle="#111827";
