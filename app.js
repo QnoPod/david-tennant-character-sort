@@ -754,7 +754,7 @@ async function createResultBlob() {
   ctx.fillText("MY TOP 9",70,155);
 
   ctx.fillStyle="#6b7280"; ctx.font="400 25px sans-serif";
-  ctx.fillText("デイヴィッド・テナント キャラクター 推し9選",72,198);
+  ctx.fillText("デイヴィッド・テナント 好き顔9選",72,198);
 
   const displayOrder=[3,4,5,1,0,2,6,7,8];
 
