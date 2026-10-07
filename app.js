@@ -175,11 +175,6 @@ const characters = [
     "image": "images/Gaz Witney.jpg"
   },
   {
-    "name": "クリーグ将軍",
-    "work": "ヴォクス・マキナの伝説",
-    "image": "images/General Kreig.png"
-  },
-  {
     "name": "現在を司るクリスマスの霊",
     "work": "The Catherine Tate Show: Nan's Christmas Carol",
     "image": "images/Ghost of Christmas Present.webp"
