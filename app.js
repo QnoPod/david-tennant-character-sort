@@ -797,37 +797,39 @@ $("save-btn").addEventListener("click",async()=>{
 $("share-btn").addEventListener("click",async()=>{
   const shareText = `私のDT 好き顔9選 👑
 
-#DT #DTCharacterSort
+#DTCharacterSort
 ${location.href}`;
 
-  const blob = await createResultBlob();
-  if(!blob) return;
+  // 画像付き共有に対応するスマホ等では、
+  // 結果画像を生成してOSの共有画面へ渡す。
+  // Webの仕様上、共有先をXに固定することはできない。
+  if (navigator.share && navigator.canShare) {
+    const blob = await createResultBlob();
+    if (!blob) return;
 
-  const file = new File(
-    [blob],
-    "dt-character-top9.png",
-    {type:"image/png"}
-  );
+    const file = new File(
+      [blob],
+      "dt-character-top9.png",
+      {type:"image/png"}
+    );
 
-  // 画像付き共有が使える端末では、画像と本文を共有
-  if (
-    navigator.share &&
-    navigator.canShare &&
-    navigator.canShare({files:[file]})
-  ) {
-    try {
-      await navigator.share({
-        title: "DT 好き顔9選",
-        text: shareText,
-        files: [file]
-      });
-      return;
-    } catch (e) {
-      if (e && e.name === "AbortError") return;
+    if (navigator.canShare({files:[file]})) {
+      try {
+        await navigator.share({
+          title: "DT 好き顔9選",
+          text: shareText,
+          files: [file]
+        });
+        return;
+      } catch (e) {
+        if (e && e.name === "AbortError") return;
+      }
     }
   }
 
-  // PCなどではX投稿作成画面を開き、結果画像も自動保存
+  // PC等ではXの投稿作成画面を即座に開く。
+  // X Web Intentはローカル画像の自動添付には対応していないため、
+  // 結果画像を同時に自動保存する。
   const intent =
     "https://twitter.com/intent/tweet?text=" +
     encodeURIComponent(shareText);
@@ -842,7 +844,10 @@ ${location.href}`;
     window.location.href = intent;
   }
 
-  downloadBlob(blob, "dt-character-top9.png");
+  const blob = await createResultBlob();
+  if (blob) {
+    downloadBlob(blob, "dt-character-top9.png");
+  }
 });
 
 renderHero();
