@@ -1,15 +1,67 @@
-<!DOCTYPE html>
-<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>デイヴィッド・テナント キャラクター 推し9選</title>
-<meta name="description" content="デイヴィッド・テナントの出演キャラクターから、あなたの推しTOP9を選ぼう。">
-<link rel="stylesheet" href="style.css"></head><body><main>
-<section id="home" class="screen active"><div class="home-wrap"><div id="hero-collage" class="hero-collage"></div><div class="hero-copy">
-<p class="small-title">デイヴィッド・テナント</p><h1>キャラクター<br><span>推し9選</span></h1>
-<p class="description">キャラクターを見比べて、いちばん好きな1人を選ぼう。</p><p id="member-count" class="count"></p>
-<button id="start-btn" class="start-btn">診断を開始する →</button>
-<details class="about"><summary>＋ 対象キャラクター・画像について</summary><p>未視聴・知らないキャラクターは「知らない」で除外できます。画像は images フォルダに追加してください。</p></details>
-</div></div></section>
-<section id="quiz" class="screen"><div class="quiz-wrap"><div class="progress-row"><div id="percent">0%</div><div class="progress"><div id="bar"></div></div></div>
-<h2>この中で、一番好きなキャラクターは？</h2><div id="choices" class="choices"></div><div class="quiz-bottom"><button id="skip-round" class="link-btn">この組み合わせはスキップ</button></div></div></section>
-<section id="result" class="screen"><div class="result-wrap"><p class="small-title">RESULT</p><h2>あなたの推しキャラ9選</h2><div id="ranking" class="ranking"></div><div class="result-actions"><button id="restart-btn" class="secondary-btn">もう一度やる</button></div></div></section>
-</main><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>デイヴィッド・テナント キャラクター 推し9選</title>
+  <meta name="description" content="4人ずつキャラクターを見比べて、あなたのデイヴィッド・テナント推しキャラTOP9を決めよう。">
+  <meta property="og:title" content="デイヴィッド・テナント キャラクター 推し9選">
+  <meta property="og:description" content="4人の中から推しを選んで、あなたのTOP9を作ろう。">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <section id="home" class="screen active">
+    <div class="home-wrap">
+      <div id="hero-collage" class="hero-collage"></div>
+      <div class="hero-copy">
+        <p class="small-title">デイヴィッド・テナント</p>
+        <h1>キャラクター<br><span>推し9選</span></h1>
+        <p class="description">4人の中から、いちばん好きなキャラクターを選ぼう。</p>
+        <p id="member-count" class="count"></p>
+        <button id="start-btn" class="start-btn">診断を開始する →</button>
+        <details class="about">
+          <summary>＋ 対象キャラクター・画像について</summary>
+          <p>知らないキャラクターは「知らない」で除外できます。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="quiz" class="screen">
+    <div class="quiz-wrap">
+      <div class="progress-row">
+        <div id="percent">0%</div>
+        <div class="progress"><div id="bar"></div></div>
+      </div>
+      <h2>この中で、一番好きなキャラクターは？</h2>
+      <div id="choices" class="choices"></div>
+      <div class="quiz-bottom">
+        <button id="skip-round" class="link-btn">この組み合わせはスキップ</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="result" class="screen">
+    <div class="result-wrap">
+      <p class="small-title">RESULT</p>
+      <h2>あなたの推しキャラ9選</h2>
+      <div id="ranking" class="ranking"></div>
+
+      <div class="share-panel">
+        <button id="share-btn" class="share-btn">Xで画像付き共有</button>
+        <button id="save-btn" class="secondary-btn">結果画像を保存</button>
+        <p class="share-note">スマホでは共有先からXを選ぶと画像付きで投稿できます。</p>
+      </div>
+
+      <div class="result-actions">
+        <button id="restart-btn" class="secondary-btn">もう一度やる</button>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
