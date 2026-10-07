@@ -838,7 +838,7 @@ $("share-btn").addEventListener("click",async()=>{
   const shareText = `私のDT 好き顔9選 👑
 
 #DTCharacterSort
-${location.href}`;
+https://qnopod.github.io/david-tennant-character-sort/?v=3`;
 
   // 画像付き共有に対応するスマホ等では、
   // 結果画像を生成してOSの共有画面へ渡す。
