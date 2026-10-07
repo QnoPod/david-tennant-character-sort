@@ -35,9 +35,6 @@ button{font:inherit}
   font-size:1.05rem;cursor:pointer;background:linear-gradient(90deg,#7060ea,#ec2f9c)
 }
 .start-btn{width:min(450px,100%)}
-.about{margin-top:26px;color:#596171;font-size:.92rem}
-.about summary{cursor:pointer;text-decoration:underline;text-underline-offset:4px}
-.about p{line-height:1.7}
 
 .quiz-wrap{width:min(1120px,calc(100% - 32px));margin:0 auto;padding:38px 0 80px}
 .progress-row{margin-bottom:24px}
@@ -52,18 +49,18 @@ button{font:inherit}
   overflow:hidden;cursor:pointer;transition:.15s ease;min-width:0
 }
 .choice:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.07)}
-.choice-media{aspect-ratio:1/1;background:#eceff3;overflow:hidden}
-.choice img{display:block;width:100%;height:100%;object-fit:cover}
-.choice .fallback{aspect-ratio:1/1}
-.choice-body{padding:13px 14px 14px}
+.choice-media{
+  aspect-ratio:4/5;background:#eef0f3;overflow:hidden;
+  display:flex;align-items:center;justify-content:center
+}
+.choice img{
+  display:block;width:100%;height:100%;
+  object-fit:contain;
+}
+.choice .fallback{aspect-ratio:4/5}
+.choice-body{padding:13px 14px 15px}
 .choice-name{font-size:1.05rem;font-weight:800;line-height:1.35}
 .choice-work{margin-top:4px;font-size:.82rem;color:#646c79;min-height:2.4em}
-.unknown-btn{
-  border:0;background:transparent;color:#8a91a0;font-size:.76rem;
-  padding:9px 0 0;cursor:pointer;text-decoration:underline
-}
-.quiz-bottom{text-align:center;margin-top:24px}
-.link-btn{border:0;background:transparent;color:#6b7280;cursor:pointer;text-decoration:underline}
 
 .result-wrap{width:min(880px,calc(100% - 32px));margin:0 auto;padding:50px 0 80px;text-align:center}
 .result-wrap h2{font-size:clamp(2rem,5vw,3.4rem);margin:0 0 28px}
@@ -74,9 +71,15 @@ button{font:inherit}
   min-width:34px;height:34px;padding:0 8px;border-radius:8px;
   display:flex;align-items:center;justify-content:center;font-weight:800
 }
-.rank-media{aspect-ratio:1/1;background:#eceff3;overflow:hidden}
-.rank img{width:100%;height:100%;object-fit:cover;display:block}
-.rank .fallback{aspect-ratio:1/1}
+.rank-media{
+  aspect-ratio:4/5;background:#eef0f3;overflow:hidden;
+  display:flex;align-items:center;justify-content:center
+}
+.rank img{
+  width:100%;height:100%;
+  object-fit:contain;display:block
+}
+.rank .fallback{aspect-ratio:4/5}
 .rank-body{padding:11px 12px 13px}
 .rank-name{font-weight:800}
 .rank-work{font-size:.78rem;color:#747b87;margin-top:3px}
@@ -110,7 +113,6 @@ button{font:inherit}
   .choice-body{padding:10px}
   .choice-name{font-size:.84rem}
   .choice-work{font-size:.68rem}
-  .unknown-btn{font-size:.68rem}
   .ranking{gap:7px}
   .rank-name{font-size:.78rem}
   .rank-work{font-size:.64rem}
