@@ -254,7 +254,6 @@ async function createResultBlob() {
   const labelH=112;
   const rows=Math.ceil(state.result.length/3);
 
-  // 3段目のキャラ名・作品名まで必ず入る高さを自動計算
   const contentBottom = top + rows*(imgH+labelH) + Math.max(0,rows-1)*gap;
   const H = Math.ceil(contentBottom + 110);
 
@@ -345,30 +344,55 @@ $("save-btn").addEventListener("click",async()=>{
 });
 
 $("share-btn").addEventListener("click",async()=>{
-  const shareText="私のデイヴィッド・テナント キャラクター推し9選 👑\n#DavidTennant #DTCharacterSort";
+  const shareText =
+    "私のデイヴィッド・テナント キャラクター推し9選 👑\n\n" +
+    "#DavidTennant #デイヴィッドテナント #DTCharacterSort\n" +
+    location.href;
+
   const blob=await createResultBlob();
   if(!blob)return;
 
-  const file=new File([blob],"dt-character-top9.png",{type:"image/png"});
+  const file=new File(
+    [blob],
+    "dt-character-top9.png",
+    {type:"image/png"}
+  );
 
-  if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+  // スマホ：Xを共有先に選ぶと、結果画像 + 本文 + ハッシュタグを
+  // Xの投稿作成画面へ渡す。
+  if(
+    navigator.share &&
+    navigator.canShare &&
+    navigator.canShare({files:[file]})
+  ){
     try{
       await navigator.share({
         title:"デイヴィッド・テナント キャラクター 推し9選",
         text:shareText,
-        url:location.href,
         files:[file]
       });
       return;
     }catch(e){
-      if(e&&e.name==="AbortError")return;
+      if(e && e.name==="AbortError") return;
     }
   }
 
+  // PC等：画像を保存して、ハッシュタグ入りのX投稿作成画面を開く。
   downloadBlob(blob,"dt-character-top9.png");
-  const intent="https://twitter.com/intent/tweet?text="+encodeURIComponent(shareText+"\n"+location.href);
+
+  const intent =
+    "https://twitter.com/intent/tweet?text=" +
+    encodeURIComponent(shareText);
+
   window.open(intent,"_blank","noopener,noreferrer");
-  setTimeout(()=>alert("結果画像を保存しました。Xの投稿画面に画像を添付してください。"),300);
+
+  setTimeout(()=>{
+    alert(
+      "結果画像を保存しました。\n" +
+      "Xの投稿作成画面には本文とハッシュタグを入れています。\n" +
+      "保存した画像を添付してください。"
+    );
+  },300);
 });
 
 renderHero();
