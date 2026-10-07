@@ -1,5 +1,37 @@
-
-const characters = [{"name": "アレック・ハーディ", "work": "Broadchurch", "image": "images/alec-hardy.jpg"}, {"name": "クロウリー", "work": "Good Omens", "image": "images/crowley.jpg"}, {"name": "10代目ドクター", "work": "Doctor Who", "image": "images/tenth-doctor.jpg"}, {"name": "14代目ドクター", "work": "Doctor Who", "image": "images/fourteenth-doctor.jpg"}, {"name": "キルグレイヴ", "work": "Jessica Jones", "image": "images/kilgrave.jpg"}, {"name": "フィリアス・フォッグ", "work": "Around the World in 80 Days", "image": "images/phileas-fogg.jpg"}, {"name": "トニー・バディンガム", "work": "Rivals", "image": "images/tony-baddingham.jpg"}, {"name": "マクベス", "work": "Macbeth", "image": "images/macbeth.jpg"}, {"name": "リチャード二世", "work": "Richard II", "image": "images/richard-ii.jpg"}, {"name": "カサノヴァ", "work": "Casanova", "image": "images/casanova.jpg"}, {"name": "キャンベル・ベイン", "work": "Takin' Over the Asylum", "image": "images/campbell-bain.jpg"}, {"name": "ブレンダン・ブロック", "work": "Secret Smile", "image": "images/brendan-block.jpg"}, {"name": "ピーター・カーライル", "work": "Blackpool", "image": "images/peter-carlisle.jpg"}, {"name": "ピーター・ヴィンセント", "work": "Fright Night", "image": "images/peter-vincent.jpg"}, {"name": "ジェームズ・アーバー", "work": "The Decoy Bride", "image": "images/james-arber.jpg"}, {"name": "アーサー・エディントン", "work": "Einstein and Eddington", "image": "images/eddington.jpg"}, {"name": "デイヴ・タイラー", "work": "Single Father", "image": "images/dave-tiler.jpg"}, {"name": "エイデン・ホインズ", "work": "The Politician's Husband", "image": "images/aiden-hoynes.jpg"}, {"name": "エメット・カーヴァー", "work": "Gracepoint", "image": "images/emmett-carver.jpg"}, {"name": "ハリー・ワトリング", "work": "Inside Man", "image": "images/harry-watling.jpg"}, {"name": "デニス・ニルセン", "work": "Des", "image": "images/dennis-nilsen.jpg"}, {"name": "サイモン・イェーツ", "work": "There She Goes", "image": "images/simon-yates.jpg"}, {"name": "ハムレット", "work": "Hamlet", "image": "images/hamlet.jpg"}, {"name": "ドン・ジュアン", "work": "Don Juan in Soho", "image": "images/don-juan.jpg"}, {"name": "トム・ケンドリック", "work": "Deadwater Fell", "image": "images/tom-kendrick.jpg"}, {"name": "R.D.レイン", "work": "Mad to Be Normal", "image": "images/rd-laing.jpg"}, {"name": "ジョン・ノックス", "work": "Mary Queen of Scots", "image": "images/john-knox.jpg"}, {"name": "バーティ・クラウチ・Jr.", "work": "Harry Potter and the Goblet of Fire", "image": "images/barty-crouch-jr.jpg"}, {"name": "ジンジャー・リトルジョン", "work": "Bright Young Things", "image": "images/ginger-littlejohn.jpg"}, {"name": "ウィル・バートン", "work": "The Escape Artist", "image": "images/will-burton.jpg"}, {"name": "トミー", "work": "Recovery", "image": "images/tommy-recovery.jpg"}, {"name": "ケイル・エレンドライヒ", "work": "Bad Samaritan", "image": "images/cale-erendreich.jpg"}];
+const characters = [
+  { name: "アレック・ハーディ", work: "Broadchurch", image: "images/AlecHardy.png" },
+  { name: "クロウリー", work: "Good Omens", image: "images/Crowley.jpg" },
+  { name: "10代目ドクター", work: "Doctor Who", image: "images/10thDoctor.jpg" },
+  { name: "14代目ドクター", work: "Doctor Who", image: "images/14thDoctor.jpg" },
+  { name: "キルグレイヴ", work: "Jessica Jones", image: "images/Kevin Thompson.webp" },
+  { name: "フィリアス・フォッグ", work: "Around the World in 80 Days", image: "images/Phileas Fogg.jpg" },
+  { name: "トニー・バディンガム", work: "Rivals", image: "images/Tony Baddingham.webp" },
+  { name: "マクベス", work: "Macbeth", image: "images/Macbeth.png" },
+  { name: "リチャード二世", work: "Richard II", image: "images/Richard II.jpg" },
+  { name: "カサノヴァ", work: "Casanova", image: "images/Casanova.jpg" },
+  { name: "キャンベル・ベイン", work: "Takin' Over the Asylum", image: "images/Campbell.jpg" },
+  { name: "ブレンダン・ブロック", work: "Secret Smile", image: "images/Brendan Block.webp" },
+  { name: "ピーター・カーライル", work: "Blackpool", image: "images/Peter Carlisle.png" },
+  { name: "ピーター・ヴィンセント", work: "Fright Night", image: "images/Peter Vincent.webp" },
+  { name: "ジェームズ・アーバー", work: "The Decoy Bride", image: "images/James Arber.jpg" },
+  { name: "アーサー・エディントン", work: "Einstein and Eddington", image: "images/Arthur Eddington.jpg" },
+  { name: "デイヴ・タイラー", work: "Single Father", image: "images/Dave Tiler.jpg" },
+  { name: "エイデン・ホインズ", work: "The Politician's Husband", image: "images/Aidan Hoynes.webp" },
+  { name: "エメット・カーヴァー", work: "Gracepoint", image: "images/Emmett Carver.webp" },
+  { name: "ハリー・ワトリング", work: "Inside Man", image: "images/Harry Watling.png" },
+  { name: "デニス・ニルセン", work: "Des", image: "images/Des.jpg" },
+  { name: "サイモン・イェーツ", work: "There She Goes", image: "images/Simon.jpg" },
+  { name: "ハムレット", work: "Hamlet", image: "images/Hamlet.jpg" },
+  { name: "ドン・ジュアン", work: "Don Juan in Soho", image: "images/Don Juan.webp" },
+  { name: "トム・ケンドリック", work: "Deadwater Fell", image: "images/Tom Kendrick.webp" },
+  { name: "R.D.レイン", work: "Mad to Be Normal", image: "images/Ronald David Laing.jpg" },
+  { name: "ジョン・ノックス", work: "Mary Queen of Scots", image: "images/John Knox.jpg" },
+  { name: "バーティ・クラウチ・Jr.", work: "Harry Potter and the Goblet of Fire", image: "images/Barty Crouch Junior.png" },
+  { name: "ジンジャー・リトルジョン", work: "Bright Young Things", image: "images/Ginger Littlejohn.jpg" },
+  { name: "ウィル・バートン", work: "The Escape Artist", image: "images/Will Burton.webp" },
+  { name: "アラン・ハミルトン", work: "Recovery", image: "images/Alan Hamilton.jpg" },
+  { name: "ケイル・エレンドライヒ", work: "Bad Samaritan", image: "images/Cale Erendreich.webp" }
+];
 
 const state = {
   active: [],
@@ -205,7 +237,6 @@ function fitText(ctx,text,maxWidth,startSize,minSize=24) {
   return minSize;
 }
 
-// 画像全体を必ず収める（切り抜かない）
 function drawContain(ctx,img,x,y,w,h) {
   const scale=Math.min(w/img.width,h/img.height);
   const dw=img.width*scale;
@@ -242,13 +273,12 @@ async function createResultBlob() {
   const margin=70,gap=18,top=245;
   const cell=(W-margin*2-gap*2)/3;
   const imgH=cell*1.25;
-  const labelH=112;
 
   for(let i=0;i<state.result.length;i++){
     const c=state.result[i];
     const row=Math.floor(i/3),col=i%3;
     const x=margin+col*(cell+gap);
-    const y=top+row*(imgH+labelH+gap);
+    const y=top+row*(imgH+112+gap);
 
     ctx.fillStyle="#eef0f3";
     ctx.fillRect(x,y,cell,imgH);
