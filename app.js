@@ -247,9 +247,20 @@ function drawContain(ctx,img,x,y,w,h) {
 }
 
 async function createResultBlob() {
-  const W=1200,H=1760;
+  const W=1200;
+  const margin=70,gap=18,top=245;
+  const cell=(W-margin*2-gap*2)/3;
+  const imgH=cell*1.25;
+  const labelH=112;
+  const rows=Math.ceil(state.result.length/3);
+
+  // 3段目のキャラ名・作品名まで必ず入る高さを自動計算
+  const contentBottom = top + rows*(imgH+labelH) + Math.max(0,rows-1)*gap;
+  const H = Math.ceil(contentBottom + 110);
+
   const canvas=document.createElement("canvas");
-  canvas.width=W;canvas.height=H;
+  canvas.width=W;
+  canvas.height=H;
   const ctx=canvas.getContext("2d");
 
   ctx.fillStyle="#ffffff";
@@ -270,15 +281,11 @@ async function createResultBlob() {
   ctx.font="400 25px sans-serif";
   ctx.fillText("デイヴィッド・テナント キャラクター 推し9選",72,198);
 
-  const margin=70,gap=18,top=245;
-  const cell=(W-margin*2-gap*2)/3;
-  const imgH=cell*1.25;
-
   for(let i=0;i<state.result.length;i++){
     const c=state.result[i];
     const row=Math.floor(i/3),col=i%3;
     const x=margin+col*(cell+gap);
-    const y=top+row*(imgH+112+gap);
+    const y=top+row*(imgH+labelH+gap);
 
     ctx.fillStyle="#eef0f3";
     ctx.fillRect(x,y,cell,imgH);
