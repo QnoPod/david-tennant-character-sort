@@ -795,22 +795,26 @@ $("save-btn").addEventListener("click",async()=>{
 });
 
 $("share-btn").addEventListener("click",async()=>{
-  const shareText =
-    "私のDT 好き顔9選 👑
+  const shareText = `私のDT 好き顔9選 👑
 
-" +
-    "#DT #DTCharacterSort
-" +
-    location.href;
+#DT #DTCharacterSort
+${location.href}`;
 
   const blob = await createResultBlob();
   if(!blob) return;
 
-  const file = new File([blob], "dt-character-top9.png", {type:"image/png"});
+  const file = new File(
+    [blob],
+    "dt-character-top9.png",
+    {type:"image/png"}
+  );
 
-  // 画像付き共有が使える端末では、画像 + 本文を共有する
-  // （Xを自動選択することはWeb仕様上できないため、共有先でXを選ぶ）
-  if (navigator.share && navigator.canShare && navigator.canShare({files:[file]})) {
+  // 画像付き共有が使える端末では、画像と本文を共有
+  if (
+    navigator.share &&
+    navigator.canShare &&
+    navigator.canShare({files:[file]})
+  ) {
     try {
       await navigator.share({
         title: "DT 好き顔9選",
@@ -823,20 +827,22 @@ $("share-btn").addEventListener("click",async()=>{
     }
   }
 
-  // 共有APIが使えない環境では、X投稿画面を自動で開いて画像を保存する
+  // PCなどではX投稿作成画面を開き、結果画像も自動保存
   const intent =
     "https://twitter.com/intent/tweet?text=" +
     encodeURIComponent(shareText);
 
-  const xWindow = window.open(intent, "_blank", "noopener,noreferrer");
+  const xWindow = window.open(
+    intent,
+    "_blank",
+    "noopener,noreferrer"
+  );
+
   if (!xWindow) {
     window.location.href = intent;
   }
 
-  downloadBlob(blob,"dt-character-top9.png");
-  setTimeout(()=>{
-    alert("Xの投稿作成画面を開きました。画像は自動保存したので、投稿画面に添付してください。");
-  }, 300);
+  downloadBlob(blob, "dt-character-top9.png");
 });
 
 renderHero();
