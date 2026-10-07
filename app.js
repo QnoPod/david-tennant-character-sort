@@ -1,12 +1,12 @@
 const characters = [
   {
     "name": "10代目ドクター",
-    "work": "Doctor Who",
+    "work": "Doctor Whoシリーズ",
     "image": "images/10thDoctor.jpg"
   },
   {
     "name": "14代目ドクター",
-    "work": "Doctor Who",
+    "work": "Doctor Who: 60th Anniversary Specials",
     "image": "images/14thDoctor.jpg"
   },
   {
@@ -20,13 +20,13 @@ const characters = [
     "image": "images/Alan Hamilton.jpg"
   },
   {
-    "name": "Alastair Galbraith",
-    "work": "",
+    "name": "アリスター・ガルブレイス",
+    "work": "Bite",
     "image": "images/Alastair Galbraith.jpg"
   },
   {
     "name": "アレック・ハーディ",
-    "work": "Broadchurch",
+    "work": "ブロードチャーチ〜殺意の町〜",
     "image": "images/AlecHardy.png"
   },
   {
@@ -35,13 +35,13 @@ const characters = [
     "image": "images/Arthur Eddington.jpg"
   },
   {
-    "name": "バーティ・クラウチ・Jr.",
-    "work": "Harry Potter and the Goblet of Fire",
+    "name": "バーティ・クラウチ・ジュニア",
+    "work": "ハリー・ポッターと炎のゴブレット",
     "image": "images/Barty Crouch Junior.png"
   },
   {
-    "name": "Benedick",
-    "work": "",
+    "name": "ベネディック",
+    "work": "Much Ado About Nothing",
     "image": "images/Benedick.jpg"
   },
   {
@@ -51,7 +51,7 @@ const characters = [
   },
   {
     "name": "ケイル・エレンドライヒ",
-    "work": "Bad Samaritan",
+    "work": "バッド・サマリタン",
     "image": "images/Cale Erendreich.webp"
   },
   {
@@ -60,33 +60,33 @@ const characters = [
     "image": "images/Campbell.jpg"
   },
   {
-    "name": "Captain Gerald Colthurst",
-    "work": "",
+    "name": "ジェラルド・コルサースト大尉",
+    "work": "The Last September",
     "image": "images/Captain Gerald Colthurst.jpg"
   },
   {
-    "name": "カサノヴァ",
+    "name": "ジャコモ・カサノヴァ",
     "work": "Casanova",
     "image": "images/Casanova.jpg"
   },
   {
-    "name": "Charlie",
-    "work": "",
+    "name": "チャーリー",
+    "work": "Nine 1/2 Minutes",
     "image": "images/Charlie.jpg"
   },
   {
-    "name": "Chris",
-    "work": "",
+    "name": "クリス",
+    "work": "Learners",
     "image": "images/Chris.webp"
   },
   {
-    "name": "Christopher Williams",
-    "work": "",
+    "name": "クリストファー・ウィリアムズ",
+    "work": "The Deputy",
     "image": "images/Christopher Williams.jpg"
   },
   {
     "name": "クロウリー",
-    "work": "Good Omens",
+    "work": "グッド・オーメンズ",
     "image": "images/Crowley.jpg"
   },
   {
@@ -95,13 +95,13 @@ const characters = [
     "image": "images/Dave Tiler.jpg"
   },
   {
-    "name": "David",
-    "work": "",
+    "name": "デイヴィッド",
+    "work": "Staged",
     "image": "images/David.png"
   },
   {
-    "name": "Davina",
-    "work": "",
+    "name": "ダヴィーナ",
+    "work": "Rab C. Nesbitt",
     "image": "images/Davina.png"
   },
   {
@@ -110,8 +110,8 @@ const characters = [
     "image": "images/Des.jpg"
   },
   {
-    "name": "Doctor Gordon Briscoe",
-    "work": "",
+    "name": "ゴードン・ブリスコー博士",
+    "work": "The Quatermass Experiment",
     "image": "images/Doctor Gordon Briscoe.jpg"
   },
   {
@@ -120,28 +120,28 @@ const characters = [
     "image": "images/Don Juan.webp"
   },
   {
-    "name": "Donald",
-    "work": "",
+    "name": "ドナルド・ピーターソン",
+    "work": "Nativity 2: Danger in the Manger!",
     "image": "images/Donald.jpg"
   },
   {
-    "name": "Doug McLeod",
-    "work": "",
+    "name": "ダグ・マクラウド",
+    "work": "What We Did on Our Holiday",
     "image": "images/Doug McLeod.jpg"
   },
   {
-    "name": "Dr. Edgar Fallon",
-    "work": "",
+    "name": "エドガー・ファロン医師",
+    "work": "クリミナル：イギリス編",
     "image": "images/Dr. Edgar Fallon.webp"
   },
   {
-    "name": "Dr. Krull",
-    "work": "",
+    "name": "ドクター・クラル",
+    "work": "Spine Chillers",
     "image": "images/Dr. Krull.jpg"
   },
   {
-    "name": "Drunk Undergraduate",
-    "work": "",
+    "name": "酔っ払った学部生",
+    "work": "Jude",
     "image": "images/Drunk Undergraduate.jpg"
   },
   {
@@ -150,43 +150,43 @@ const characters = [
     "image": "images/Emmett Carver.webp"
   },
   {
-    "name": "Ex",
-    "work": "",
+    "name": "元カレ",
+    "work": "Being Considered",
     "image": "images/Ex.jpg"
   },
   {
-    "name": "Gary Innes",
-    "work": "",
+    "name": "ゲイリー・イネス",
+    "work": "Quality Control",
     "image": "images/Gary Innes.jpg"
   },
   {
-    "name": "Gavin MacEwan",
-    "work": "",
+    "name": "ギャビン・マキュアン",
+    "work": "Trust",
     "image": "images/Gavin MacEwan.png"
   },
   {
-    "name": "Gavin",
-    "work": "",
+    "name": "ギャビン",
+    "work": "A Mug's Game",
     "image": "images/Gavin.jpg"
   },
   {
-    "name": "Gaz Witney",
-    "work": "",
+    "name": "ギャズ・ホイットニー",
+    "work": "HIGH STAKES",
     "image": "images/Gaz Witney.jpg"
   },
   {
-    "name": "General Kreig",
-    "work": "",
+    "name": "クリーグ将軍",
+    "work": "ヴォクス・マキナの伝説",
     "image": "images/General Kreig.png"
   },
   {
-    "name": "Ghost of Christmas Present",
-    "work": "",
+    "name": "現在を司るクリスマスの霊",
+    "work": "The Catherine Tate Show: Nan's Christmas Carol",
     "image": "images/Ghost of Christmas Present.webp"
   },
   {
-    "name": "Gianpiero",
-    "work": "",
+    "name": "ジャンピエロ",
+    "work": "フォー・シーズンズ",
     "image": "images/Gianpiero.jpg"
   },
   {
@@ -195,13 +195,13 @@ const characters = [
     "image": "images/Ginger Littlejohn.jpg"
   },
   {
-    "name": "Gordon Stylus",
-    "work": "",
+    "name": "ゴードン・スタイラス",
+    "work": "Randall & Hopkirk (Deceased)",
     "image": "images/Gordon Stylus.jpg"
   },
   {
-    "name": "Greig Miller",
-    "work": "",
+    "name": "グレイグ・ミラー",
+    "work": "Terri McIntyre - Classy Bitch",
     "image": "images/Greig Miller.jpg"
   },
   {
@@ -215,13 +215,13 @@ const characters = [
     "image": "images/Harry Watling.png"
   },
   {
-    "name": "Hector",
-    "work": "",
+    "name": "ヘクター",
+    "work": "ブラック・レコード〜禁じられた記録〜/ヒトラーコード39",
     "image": "images/Hector.jpg"
   },
   {
-    "name": "Ian Ventham",
-    "work": "",
+    "name": "イアン・ヴェンサム",
+    "work": "木曜殺人クラブ",
     "image": "images/Ian Ventham.png"
   },
   {
@@ -230,58 +230,58 @@ const characters = [
     "image": "images/James Arber.jpg"
   },
   {
-    "name": "Jean-François Mercier",
-    "work": "",
+    "name": "ジャン＝フランソワ・メルシエ",
+    "work": "Spies of Warsaw",
     "image": "images/Jean-François Mercier.jpg"
   },
   {
-    "name": "Jean-Jacques Rousseau",
-    "work": "",
+    "name": "ジャン＝ジャック・ルソー",
+    "work": "THE ROMANTICS",
     "image": "images/Jean-Jacques Rousseau.jpg"
   },
   {
-    "name": "Jimmy Murphy",
-    "work": "",
+    "name": "ジミー・マーフィー",
+    "work": "ユナイテッド -ミュンヘンの悲劇-",
     "image": "images/Jimmy Murphy.jpg"
   },
   {
-    "name": "John Halder",
-    "work": "",
+    "name": "ジョン・ハルダー",
+    "work": "National Theatre Live: Good",
     "image": "images/John Halder.jpg"
   },
   {
     "name": "ジョン・ノックス",
-    "work": "Mary Queen of Scots",
+    "work": "ふたりの女王 メアリーとエリザベス",
     "image": "images/John Knox.jpg"
   },
   {
-    "name": "John MacBryde",
-    "work": "",
+    "name": "ジョン・マクブライド",
+    "work": "The Tales of Para Handy",
     "image": "images/John MacBryde.jpg"
   },
   {
-    "name": "John",
-    "work": "",
+    "name": "ジョン",
+    "work": "You, Me and Him",
     "image": "images/John.jpg"
   },
   {
-    "name": "John (21st)",
-    "work": "",
+    "name": "ジョン",
+    "work": "Love in the 21st Century",
     "image": "images/John_21st.jpg"
   },
   {
-    "name": "Jose-Luis and Piers",
-    "work": "",
+    "name": "ホセ＝ルイス",
+    "work": "POSH NOSH",
     "image": "images/Jose-Luis and Piers.jpg"
   },
   {
     "name": "キルグレイヴ",
-    "work": "Jessica Jones",
+    "work": "Marvel ジェシカ・ジョーンズ",
     "image": "images/Kevin Thompson.webp"
   },
   {
-    "name": "Lord Pomfrey",
-    "work": "",
+    "name": "ピアース・ポンフリー",
+    "work": "聖トリニアンズ女学院２",
     "image": "images/Lord Pomfrey.png"
   },
   {
@@ -290,63 +290,63 @@ const characters = [
     "image": "images/Macbeth.png"
   },
   {
-    "name": "Mark",
-    "work": "",
+    "name": "マーク",
+    "work": "96 Ways to Say I Love You",
     "image": "images/Mark.jpg"
   },
   {
-    "name": "Martin Lamb",
-    "work": "",
+    "name": "マーティン・ラム",
+    "work": "Hang Ups",
     "image": "images/Martin Lamb.jpg"
   },
   {
-    "name": "Max Valentine",
-    "work": "",
+    "name": "マックス・ヴァレンタイン",
+    "work": "The Mrs Bradley Mysteries",
     "image": "images/Max Valentine.jpg"
   },
   {
-    "name": "Mr Gibson",
-    "work": "",
+    "name": "ギブソン氏",
+    "work": "He Knew He Was Right",
     "image": "images/Mr Gibson.jpg"
   },
   {
-    "name": "Mr Slightlyman",
-    "work": "",
+    "name": "ミスター・スライトリーマン",
+    "work": "THIS IS JINSY",
     "image": "images/Mr Slightlyman.jpg"
   },
   {
-    "name": "Mr. Logan",
-    "work": "",
+    "name": "ローガン先生",
+    "work": "The Big Night In",
     "image": "images/Mr. Logan.png"
   },
   {
-    "name": "Mr. Watson",
-    "work": "",
+    "name": "ミスター・ワトソン",
+    "work": "Old Street",
     "image": "images/Mr. Watson.jpg"
   },
   {
-    "name": "Neil McDonald",
-    "work": "",
+    "name": "ニール・マクドナルド",
+    "work": "Dramarama",
     "image": "images/Neil McDonald.jpg"
   },
   {
-    "name": "Nick Davies",
-    "work": "",
+    "name": "ニック・デイヴィス",
+    "work": "The Hack",
     "image": "images/Nick Davies.jpg"
   },
   {
-    "name": "Nick",
-    "work": "",
+    "name": "ニック",
+    "work": "True Love",
     "image": "images/Nick.jpg"
   },
   {
-    "name": "Nurse",
-    "work": "",
+    "name": "看護師",
+    "work": "HOLDING THE BABY",
     "image": "images/Nurse.jpg"
   },
   {
-    "name": "Pete",
-    "work": "",
+    "name": "ピート",
+    "work": "Sweetnightgoodheart",
     "image": "images/Pete.jpg"
   },
   {
@@ -356,7 +356,7 @@ const characters = [
   },
   {
     "name": "ピーター・ヴィンセント",
-    "work": "Fright Night",
+    "work": "フライトナイト/恐怖の夜",
     "image": "images/Peter Vincent.webp"
   },
   {
@@ -365,83 +365,83 @@ const characters = [
     "image": "images/Phileas Fogg.jpg"
   },
   {
-    "name": "Policeman",
-    "work": "",
+    "name": "警察官",
+    "work": "BUNCH OF FIVE",
     "image": "images/Policeman.jpg"
   },
   {
-    "name": "Regenerated Tony Blair",
-    "work": "",
+    "name": "トニー・ブレア",
+    "work": "Dead Ringers",
     "image": "images/Regenerated Tony Blair.jpg"
   },
   {
-    "name": "Rex Alexander",
-    "work": "",
+    "name": "レックス・アレクサンダー",
+    "work": "Rex Is Not Your Lawyer",
     "image": "images/Rex Alexander.jpg"
   },
   {
-    "name": "Richard Hoggart",
-    "work": "",
+    "name": "リチャード・ホガート",
+    "work": "The Chatterley Affair",
     "image": "images/Richard Hoggart.jpg"
   },
   {
-    "name": "リチャード二世",
-    "work": "Richard II",
+    "name": "リチャード2世",
+    "work": "RSC Live: Richard II",
     "image": "images/Richard II.jpg"
   },
   {
-    "name": "Richard",
-    "work": "",
+    "name": "リチャード",
+    "work": "GO! GO! L.A.",
     "image": "images/Richard.jpg"
   },
   {
-    "name": "Rob Harker",
-    "work": "",
+    "name": "ロブ・ハーカー",
+    "work": "People Like Us",
     "image": "images/Rob Harker.jpg"
   },
   {
-    "name": "Roderick",
-    "work": "",
+    "name": "ロデリック・ピーターソン",
+    "work": "Nativity 2: Danger in the Manger!",
     "image": "images/Roderick.jpg"
   },
   {
-    "name": "R.D.レイン",
+    "name": "R・D・レイン",
     "work": "Mad to Be Normal",
     "image": "images/Ronald David Laing.jpg"
   },
   {
-    "name": "Simon 'Darwin' Brown",
-    "work": "",
+    "name": "サイモン・“ダーウィン”・ブラウン",
+    "work": "Duck Patrol",
     "image": "images/Simon 'Darwin' Brown.jpg"
   },
   {
-    "name": "サイモン・イェーツ",
+    "name": "サイモン",
     "work": "There She Goes",
     "image": "images/Simon.jpg"
   },
   {
-    "name": "Steve Clemens",
-    "work": "",
+    "name": "スティーブ・クレメンス",
+    "work": "THE BILL",
     "image": "images/Steve Clemens.jpg"
   },
   {
-    "name": "The Creator",
-    "work": "",
+    "name": "クリエイター",
+    "work": "The Genius Game",
     "image": "images/The Creator.png"
   },
   {
-    "name": "Theo Howard",
-    "work": "",
+    "name": "テオ・ハワード",
+    "work": "Foyle's War",
     "image": "images/Theo Howard.jpg"
   },
   {
-    "name": "Third Squaddie",
-    "work": "",
+    "name": "第3の歩兵",
+    "work": "The Play on One / Biting the Hands",
     "image": "images/Third Squaddie.jpg"
   },
   {
-    "name": "Timothy",
-    "work": "",
+    "name": "ティモシー",
+    "work": "Screening",
     "image": "images/Timothy.png"
   },
   {
@@ -455,18 +455,18 @@ const characters = [
     "image": "images/Tony Baddingham.webp"
   },
   {
-    "name": "Traffic Warden",
-    "work": "",
+    "name": "交通巡視員",
+    "work": "Traffic Warden",
     "image": "images/Traffic Warden.jpg"
   },
   {
-    "name": "Vinny",
-    "work": "",
+    "name": "ヴィニー",
+    "work": "Spaces",
     "image": "images/Vinny.jpg"
   },
   {
-    "name": "Walt",
-    "work": "",
+    "name": "ウォルト",
+    "work": "Camping",
     "image": "images/Walt.jpg"
   },
   {
@@ -475,13 +475,13 @@ const characters = [
     "image": "images/Will Burton.webp"
   },
   {
-    "name": "Will",
-    "work": "",
+    "name": "ウィル",
+    "work": "Playhouse Presents",
     "image": "images/Will.jpg"
   },
   {
-    "name": "alexander litvinenko",
-    "work": "",
+    "name": "アレクサンドル・リトビネンコ",
+    "work": "Litvinenko",
     "image": "images/alexander litvinenko.jpg"
   }
 ];
@@ -550,8 +550,8 @@ function renderHero() {
 function estimateQuestions(n) {
   let total=0,current=n;
   while(current>9){
-    total+=Math.ceil(current/4);
-    current=Math.ceil(current/4);
+    total+=Math.floor(current/4);
+    current=Math.floor(current/4)+(current%4);
   }
   return Math.max(total,1);
 }
@@ -573,13 +573,24 @@ function startQuiz() {
 
 function beginRound() {
   state.round++;
+  state.active=shuffle(state.active);
   state.active.forEach(c=>state.reachedRound.set(c.id,state.round));
+
   state.groups=[];
-  for(let i=0;i<state.active.length;i+=4){
-    state.groups.push(state.active.slice(i,i+4));
-  }
-  state.groupIndex=0;
   state.roundWinners=[];
+
+  // 選択画面は必ず4人。
+  // 4で割り切れない端数はbyeとして自動で次ラウンドへ。
+  const fullCount=Math.floor(state.active.length/4)*4;
+  const matched=state.active.slice(0,fullCount);
+  const byes=state.active.slice(fullCount);
+
+  for(let i=0;i<matched.length;i+=4){
+    state.groups.push(matched.slice(i,i+4));
+  }
+
+  state.roundWinners.push(...byes);
+  state.groupIndex=0;
   renderGroup();
 }
 
@@ -600,7 +611,7 @@ function renderGroup() {
   group.forEach(c=>{
     const card=document.createElement("article");
     card.className="choice";
-    const work = c.work ? `<div class="choice-work">${escapeHtml(c.work)}</div>` : "";
+    const work=c.work ? `<div class="choice-work">${escapeHtml(c.work)}</div>` : "";
     card.innerHTML=`
       <div class="choice-media">${imageMarkup(c)}</div>
       <div class="choice-body">
@@ -626,23 +637,28 @@ function endRound() {
     buildFinalRanking(winners);
     return;
   }
-  state.active=shuffle(winners);
+  state.active=winners;
   beginRound();
 }
 
 function buildFinalRanking(finalists) {
   const finalistIds=new Set(finalists.map(c=>c.id));
   const all=characters.map((c,i)=>({...c,id:i}));
+
   const sorted=[...all].sort((a,b)=>{
     const aFinal=finalistIds.has(a.id)?1:0;
     const bFinal=finalistIds.has(b.id)?1:0;
     if(aFinal!==bFinal) return bFinal-aFinal;
+
     const roundDiff=(state.reachedRound.get(b.id)||0)-(state.reachedRound.get(a.id)||0);
     if(roundDiff) return roundDiff;
+
     const scoreDiff=(state.score.get(b.id)||0)-(state.score.get(a.id)||0);
     if(scoreDiff) return scoreDiff;
+
     return a.name.localeCompare(b.name,"ja");
   });
+
   state.result=sorted.slice(0,9);
   renderResult();
 }
@@ -653,7 +669,7 @@ function renderResult() {
   state.result.forEach((c,i)=>{
     const el=document.createElement("article");
     el.className="rank";
-    const work = c.work ? `<div class="rank-work">${escapeHtml(c.work)}</div>` : "";
+    const work=c.work ? `<div class="rank-work">${escapeHtml(c.work)}</div>` : "";
     el.innerHTML=`
       <div class="rank-badge">${i+1}</div>
       <div class="rank-media">${imageMarkup(c)}</div>
@@ -688,20 +704,27 @@ function fitText(ctx,text,maxWidth,startSize,minSize=24) {
   return minSize;
 }
 
-function drawContain(ctx,img,x,y,w,h) {
-  const scale=Math.min(w/img.width,h/img.height);
+// david-tennant-site と同じ「正方形 + cover + center top」
+function drawSquareCoverTop(ctx,img,x,y,size) {
+  const scale=Math.max(size/img.width,size/img.height);
   const dw=img.width*scale;
   const dh=img.height*scale;
-  const dx=x+(w-dw)/2;
-  const dy=y+(h-dh)/2;
+  const dx=x+(size-dw)/2;
+  const dy=y;
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(x,y,size,size);
+  ctx.clip();
   ctx.drawImage(img,dx,dy,dw,dh);
+  ctx.restore();
 }
 
 async function createResultBlob() {
   const W=1200;
   const margin=70,gap=18,top=245;
   const cell=(W-margin*2-gap*2)/3;
-  const imgH=cell*1.25;
+  const imgH=cell; // 正方形
   const labelH=112;
   const rows=Math.ceil(state.result.length/3);
   const contentBottom=top+rows*(imgH+labelH)+Math.max(0,rows-1)*gap;
@@ -725,16 +748,18 @@ async function createResultBlob() {
 
   for(let i=0;i<state.result.length;i++){
     const c=state.result[i];
-    const row=Math.floor(i/3), col=i%3;
+    const row=Math.floor(i/3),col=i%3;
     const x=margin+col*(cell+gap);
     const y=top+row*(imgH+labelH+gap);
 
     ctx.fillStyle="#eef0f3"; ctx.fillRect(x,y,cell,imgH);
     const img=await loadImage(c.image);
-    if(img) drawContain(ctx,img,x,y,cell,imgH);
-    else {
+
+    if(img){
+      drawSquareCoverTop(ctx,img,x,y,cell);
+    }else{
       ctx.fillStyle="#9ca3af"; ctx.textAlign="center"; ctx.textBaseline="middle";
-      ctx.font="800 58px sans-serif"; ctx.fillText(initials(c.name),x+cell/2,y+imgH/2);
+      ctx.font="800 58px sans-serif"; ctx.fillText(initials(c.name),x+cell/2,y+cell/2);
       ctx.textAlign="left"; ctx.textBaseline="alphabetic";
     }
 
@@ -774,33 +799,34 @@ $("save-btn").addEventListener("click",async()=>{
   if(blob) downloadBlob(blob,"dt-character-top9.png");
 });
 
-$("share-btn").addEventListener("click",async()=>{
+$("share-btn").addEventListener("click",()=>{
   const shareText =
-    "私のデイヴィッド・テナント キャラクター推し9選 👑\n\n" +
-    "#DTCharacterSort\n" +
+    "私のデイヴィッド・テナント キャラクター推し9選 👑
+
+" +
+    "#DTCharacterSort
+" +
     location.href;
 
-  const blob=await createResultBlob();
-  if(!blob)return;
+  const intent =
+    "https://twitter.com/intent/tweet?text=" +
+    encodeURIComponent(shareText);
 
-  const file=new File([blob],"dt-character-top9.png",{type:"image/png"});
+  // クリック直後にXの投稿作成画面を開く。
+  // 非同期処理の後にwindow.openするとポップアップブロックされやすいため、
+  // Xを先に開き、結果画像は並行して自動保存する。
+  const xWindow = window.open(intent, "_blank", "noopener,noreferrer");
 
-  if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
-    try{
-      await navigator.share({
-        title:"デイヴィッド・テナント キャラクター 推し9選",
-        text:shareText,
-        files:[file]
-      });
-      return;
-    }catch(e){
-      if(e && e.name==="AbortError") return;
-    }
+  // ポップアップがブロックされた場合は同じタブでXを開く。
+  if (!xWindow) {
+    window.location.href = intent;
   }
 
-  downloadBlob(blob,"dt-character-top9.png");
-  const intent="https://twitter.com/intent/tweet?text="+encodeURIComponent(shareText);
-  window.open(intent,"_blank","noopener,noreferrer");
+  // WebのX Intentにはローカル画像を直接添付できないため、
+  // 結果画像は端末へ自動保存する。
+  createResultBlob().then(blob=>{
+    if(blob) downloadBlob(blob,"dt-character-top9.png");
+  });
 });
 
 renderHero();
