@@ -801,29 +801,22 @@ $("save-btn").addEventListener("click",async()=>{
 
 $("share-btn").addEventListener("click",()=>{
   const shareText =
-    "私のデイヴィッド・テナント キャラクター推し9選 👑
-
-" +
-    "#DTCharacterSort
-" +
+    "私のデイヴィッド・テナント 好き顔9選 👑\n\n" +
+    "#DTCharacterSort\n" +
     location.href;
 
   const intent =
     "https://twitter.com/intent/tweet?text=" +
     encodeURIComponent(shareText);
 
-  // クリック直後にXの投稿作成画面を開く。
-  // 非同期処理の後にwindow.openするとポップアップブロックされやすいため、
-  // Xを先に開き、結果画像は並行して自動保存する。
+  // クリックした瞬間にXの投稿作成画面を開く
   const xWindow = window.open(intent, "_blank", "noopener,noreferrer");
 
-  // ポップアップがブロックされた場合は同じタブでXを開く。
   if (!xWindow) {
     window.location.href = intent;
   }
 
-  // WebのX Intentにはローカル画像を直接添付できないため、
-  // 結果画像は端末へ自動保存する。
+  // 結果画像は同時に自動保存
   createResultBlob().then(blob=>{
     if(blob) downloadBlob(blob,"dt-character-top9.png");
   });
