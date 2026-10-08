@@ -545,8 +545,14 @@ function renderHero() {
 function estimateQuestions(n) {
   let total=0,current=n;
   while(current>9){
-    total+=Math.floor(current/4);
-    current=Math.floor(current/4)+(current%4);
+    const fullGroups=Math.floor(current/4);
+    const remainder=current%4;
+
+    // 4人組に加えて、2〜3人余った場合はその余り組も比較する。
+    total+=fullGroups+(remainder>=2 ? 1 : 0);
+
+    // 余りは1人でも2〜3人でも、次ラウンドへ進むのは1人。
+    current=fullGroups+(remainder>0 ? 1 : 0);
   }
   return Math.max(total,1);
 }
@@ -574,17 +580,22 @@ function beginRound() {
   state.groups=[];
   state.roundWinners=[];
 
-  // 選択画面は必ず4人。
-  // 4で割り切れない端数はbyeとして自動で次ラウンドへ。
   const fullCount=Math.floor(state.active.length/4)*4;
   const matched=state.active.slice(0,fullCount);
-  const byes=state.active.slice(fullCount);
+  const leftovers=state.active.slice(fullCount);
 
   for(let i=0;i<matched.length;i+=4){
     state.groups.push(matched.slice(i,i+4));
   }
 
-  state.roundWinners.push(...byes);
+  // 1人だけ余った場合のみ自動通過。
+  // 2〜3人余った場合は、その人数で比較して1人を選ぶ。
+  if(leftovers.length===1){
+    state.roundWinners.push(leftovers[0]);
+  }else if(leftovers.length>=2){
+    state.groups.push(leftovers);
+  }
+
   state.groupIndex=0;
   renderGroup();
 }
@@ -602,6 +613,7 @@ function renderGroup() {
 
   const wrap=$("choices");
   wrap.innerHTML="";
+  wrap.dataset.count=String(group.length);
 
   group.forEach(c=>{
     const card=document.createElement("article");
