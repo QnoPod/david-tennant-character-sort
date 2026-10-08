@@ -947,7 +947,7 @@ $("save-btn").addEventListener("click",async()=>{
 });
 
 $("share-btn").addEventListener("click",async()=>{
-  const shareText = `私のDT 好き顔9選 👑
+  const shareText = `私のDT好き顔9選👑
 
 #DTCharacterSort
 https://qnopod.github.io/david-tennant-character-sort/?v=3`;
