@@ -481,42 +481,61 @@ const characters = [
   }
 ];
 
+const HERO_IMAGES = null;
+
+// Two complete qualifying passes, followed by adaptive comparisons of contenders.
+// The sorter intentionally uses winner-only, four-photo choices (three if needed).
+const SCREENING_ROUNDS = 2;
+const CONTENDER_COUNT = 24;
+const SEMIFINAL_CHOICES = 8;
+const FINALIST_COUNT = 16;
+const FINAL_CHOICES = 12;
+
 const state = {
-  active: [],
+  all: [],
+  phase: "screening",
+  screeningRound: 0,
   groups: [],
   groupIndex: 0,
-  round: 0,
-  roundWinners: [],
-  score: new Map(),
-  reachedRound: new Map(),
-  totalEstimated: 1,
+  currentGroup: null,
+  pool: [],
+  stageChoices: 0,
+  stageAppearances: new Map(),
+  pairCounts: new Map(),
+  rating: new Map(),
+  wins: new Map(),
+  appearances: new Map(),
+  seedOrder: new Map(),
   answered: 0,
+  totalEstimated: 0,
   result: []
 };
 
 const $ = id => document.getElementById(id);
 
 function shuffle(arr) {
-  const a=[...arr];
-  for(let i=a.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));
-    [a[i],a[j]]=[a[j],a[i]];
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
 }
 
 function initials(name) {
-  return name.replace(/[・\s\.]/g,"").slice(0,2);
+  return name.replace(/[・\s\.／]/g, "").slice(0, 2);
 }
 
 function show(id) {
-  document.querySelectorAll(".screen").forEach(el=>el.classList.remove("active"));
+  document.querySelectorAll(".screen").forEach(el => el.classList.remove("active"));
   $(id).classList.add("active");
-  window.scrollTo({top:0,behavior:"instant"});
+  window.scrollTo({top: 0, behavior: "instant"});
 }
 
 function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+  return String(s).replace(/[&<>"']/g, m => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+  }[m]));
 }
 
 function imageSrc(path) {
@@ -524,185 +543,266 @@ function imageSrc(path) {
 }
 
 function imageMarkup(c) {
-  return `
-    <img src="${imageSrc(c.image)}" alt="${escapeHtml(c.name)}"
-      onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+  return `<img src="${imageSrc(c.image)}" alt="${escapeHtml(c.name)}"
+    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
     <div class="fallback" style="display:none">${escapeHtml(initials(c.name))}</div>`;
 }
 
 function renderHero() {
-  $("member-count").textContent=`${characters.length}人から、あなたのTOP9を。`;
-  const box=$("hero-collage");
-  box.innerHTML="";
-  characters.slice(0,9).forEach(c=>{
-    const el=document.createElement("div");
-    el.className="hero-tile";
-    el.innerHTML=imageMarkup(c);
+  $("member-count").textContent = `${characters.length}人から、あなたのTOP9を。`;
+  const box = $("hero-collage");
+  box.innerHTML = "";
+
+  const heroPaths = HERO_IMAGES;
+  const showItems = heroPaths
+    ? heroPaths.map(path => characters.find(c => c.image === path)).filter(Boolean)
+    : characters.slice(0, 9);
+
+  showItems.forEach(c => {
+    const el = document.createElement("div");
+    el.className = "hero-tile";
+    el.innerHTML = imageMarkup(c);
     box.appendChild(el);
   });
 }
 
-function estimateQuestions(n) {
-  let total=0,current=n;
-  while(current>9){
-    const fullGroups=Math.floor(current/4);
-    const remainder=current%4;
+function groupSizes(n) {
+  const groupCount = Math.ceil(n / 4);
+  if (groupCount === 0) return [];
+  const smaller = Math.floor(n / groupCount);
+  const extra = n % groupCount;
+  return Array.from({length: groupCount}, (_, i) => smaller + (i < extra ? 1 : 0));
+}
 
-    // 4人組に加えて、2〜3人余った場合はその余り組も比較する。
-    total+=fullGroups+(remainder>=2 ? 1 : 0);
+function splitGroups(items, sizes) {
+  let pos = 0;
+  return sizes.map(size => {
+    const group = items.slice(pos, pos + size);
+    pos += size;
+    return group;
+  });
+}
 
-    // 余りは1人でも2〜3人でも、次ラウンドへ進むのは1人。
-    current=fullGroups+(remainder>0 ? 1 : 0);
+function pairKey(a, b) {
+  return a < b ? `${a}:${b}` : `${b}:${a}`;
+}
+
+function previousMeetings(a, b) {
+  return state.pairCounts.get(pairKey(a.id, b.id)) || 0;
+}
+
+// Find a shuffled distribution with as few repeat opponents as possible.
+function makeScreeningGroups() {
+  const sizes = groupSizes(state.all.length);
+  let best = null;
+  let bestPenalty = Infinity;
+  for (let attempt = 0; attempt < 100; attempt++) {
+    const trial = splitGroups(shuffle(state.all), sizes);
+    let penalty = 0;
+    for (const group of trial) {
+      for (let i = 0; i < group.length; i++) {
+        for (let j = i + 1; j < group.length; j++) {
+          penalty += previousMeetings(group[i], group[j]);
+        }
+      }
+    }
+    if (penalty < bestPenalty) {
+      bestPenalty = penalty;
+      best = trial;
+    }
+    if (penalty === 0) break;
   }
-  return Math.max(total,1);
+  return best;
+}
+
+function rankCandidates(items) {
+  return [...items].sort((a, b) => {
+    const ratingDiff = (state.rating.get(b.id) || 1000) - (state.rating.get(a.id) || 1000);
+    if (Math.abs(ratingDiff) > 0.0000001) return ratingDiff;
+    const winsDiff = (state.wins.get(b.id) || 0) - (state.wins.get(a.id) || 0);
+    if (winsDiff) return winsDiff;
+    return (state.seedOrder.get(a.id) || 0) - (state.seedOrder.get(b.id) || 0);
+  });
 }
 
 function startQuiz() {
-  state.active=shuffle(characters.map((c,i)=>({...c,id:i})));
-  state.groups=[];
-  state.groupIndex=0;
-  state.round=0;
-  state.roundWinners=[];
-  state.score=new Map(state.active.map(c=>[c.id,0]));
-  state.reachedRound=new Map(state.active.map(c=>[c.id,0]));
-  state.totalEstimated=estimateQuestions(state.active.length);
-  state.answered=0;
-  state.result=[];
-  beginRound();
+  state.all = characters.map((c, id) => ({...c, id}));
+  state.phase = "screening";
+  state.screeningRound = 0;
+  state.groups = [];
+  state.groupIndex = 0;
+  state.currentGroup = null;
+  state.pool = [];
+  state.stageChoices = 0;
+  state.stageAppearances = new Map();
+  state.pairCounts = new Map();
+  state.rating = new Map(state.all.map(c => [c.id, 1000]));
+  state.wins = new Map(state.all.map(c => [c.id, 0]));
+  state.appearances = new Map(state.all.map(c => [c.id, 0]));
+  state.seedOrder = new Map(shuffle(state.all).map((c, i) => [c.id, i]));
+  state.answered = 0;
+  state.totalEstimated = groupSizes(state.all.length).length * SCREENING_ROUNDS
+    + SEMIFINAL_CHOICES + FINAL_CHOICES;
+  state.result = [];
+  beginScreeningRound();
   show("quiz");
 }
 
-function beginRound() {
-  state.round++;
-  state.active=shuffle(state.active);
-  state.active.forEach(c=>state.reachedRound.set(c.id,state.round));
-
-  state.groups=[];
-  state.roundWinners=[];
-
-  const fullCount=Math.floor(state.active.length/4)*4;
-  const matched=state.active.slice(0,fullCount);
-  const leftovers=state.active.slice(fullCount);
-
-  for(let i=0;i<matched.length;i+=4){
-    state.groups.push(matched.slice(i,i+4));
-  }
-
-  // 1人だけ余った場合のみ自動通過。
-  // 2〜3人余った場合は、その人数で比較して1人を選ぶ。
-  if(leftovers.length===1){
-    state.roundWinners.push(leftovers[0]);
-  }else if(leftovers.length>=2){
-    state.groups.push(leftovers);
-  }
-
-  state.groupIndex=0;
+function beginScreeningRound() {
+  state.screeningRound += 1;
+  state.groups = makeScreeningGroups();
+  state.groupIndex = 0;
   renderGroup();
 }
 
+function beginFocusedStage(phase, count) {
+  state.phase = phase;
+  state.pool = rankCandidates(phase === "semifinal" ? state.all : state.pool).slice(0, count);
+  state.stageChoices = 0;
+  state.stageAppearances = new Map(state.pool.map(c => [c.id, 0]));
+  renderGroup();
+}
+
+// Every remaining contender receives similar numbers of comparisons.
+// Within that restriction, prefer closely matched photos and fresh opponents.
+function chooseFocusedGroup() {
+  const pool = state.pool;
+  const minPlayed = Math.min(...pool.map(c => state.stageAppearances.get(c.id) || 0));
+  const underShown = pool.filter(c => (state.stageAppearances.get(c.id) || 0) === minPlayed);
+  const currentRank = rankCandidates(pool);
+  const rankOf = new Map(currentRank.map((c, i) => [c.id, i]));
+
+  const anchor = shuffle(underShown).sort((a, b) => {
+    const da = Math.abs((rankOf.get(a.id) || 0) - 8);
+    const db = Math.abs((rankOf.get(b.id) || 0) - 8);
+    return da - db;
+  })[0];
+
+  const selected = [anchor];
+  while (selected.length < Math.min(4, pool.length)) {
+    const next = shuffle(pool.filter(c => !selected.some(s => s.id === c.id)))
+      .sort((a, b) => {
+        const ratingA = state.rating.get(a.id) || 1000;
+        const ratingB = state.rating.get(b.id) || 1000;
+        const target = selected.reduce((sum, c) => sum + (state.rating.get(c.id) || 1000), 0) / selected.length;
+        const cost = c => (state.stageAppearances.get(c.id) || 0) * 1000
+          + Math.abs((state.rating.get(c.id) || 1000) - target) * 1.7
+          + selected.reduce((sum, s) => sum + previousMeetings(c, s) * 75, 0);
+        return cost(a) - cost(b);
+      })[0];
+    selected.push(next);
+  }
+  return shuffle(selected);
+}
+
 function updateProgress() {
-  const pct=Math.min(99,Math.round(state.answered/state.totalEstimated*100));
-  $("percent").textContent=`${pct}%`;
-  $("bar").style.width=`${pct}%`;
+  const pct = Math.min(100, Math.round(state.answered / state.totalEstimated * 100));
+  $("percent").textContent = `${pct}%`;
+  $("bar").style.width = `${pct}%`;
 }
 
 function renderGroup() {
   updateProgress();
-  const group=state.groups[state.groupIndex];
-  if(!group) return endRound();
+  if (state.phase === "screening") {
+    if (state.groupIndex >= state.groups.length) {
+      if (state.screeningRound < SCREENING_ROUNDS) {
+        beginScreeningRound();
+      } else {
+        beginFocusedStage("semifinal", CONTENDER_COUNT);
+      }
+      return;
+    }
+    state.currentGroup = state.groups[state.groupIndex];
+  } else {
+    if (state.stageChoices >= (state.phase === "semifinal" ? SEMIFINAL_CHOICES : FINAL_CHOICES)) {
+      if (state.phase === "semifinal") {
+        beginFocusedStage("final", FINALIST_COUNT);
+      } else {
+        buildFinalRanking();
+      }
+      return;
+    }
+    state.currentGroup = chooseFocusedGroup();
+  }
 
-  const wrap=$("choices");
-  wrap.innerHTML="";
-  wrap.dataset.count=String(group.length);
+  const group = state.currentGroup;
+  const wrap = $("choices");
+  wrap.innerHTML = "";
+  wrap.dataset.count = String(group.length);
 
-  group.forEach(c=>{
-    const card=document.createElement("article");
-    card.className="choice";
-    const work=c.work ? `<div class="choice-work">${escapeHtml(c.work)}</div>` : "";
-    card.innerHTML=`
-      <div class="choice-media">${imageMarkup(c)}</div>
-      <div class="choice-body">
-        <div class="choice-name">${escapeHtml(c.name)}</div>
-        ${work}
-      </div>`;
-    card.addEventListener("click",()=>selectCharacter(c));
+  group.forEach(c => {
+    const card = document.createElement("article");
+    card.className = "choice";
+    const work = c.work ? `<div class="choice-work">${escapeHtml(c.work)}</div>` : "";
+    card.innerHTML = `<div class="choice-media">${imageMarkup(c)}</div>
+      <div class="choice-body"><div class="choice-name">${escapeHtml(c.name)}</div>${work}</div>`;
+    card.addEventListener("click", () => selectCharacter(c));
     wrap.appendChild(card);
   });
 }
 
-function selectCharacter(c) {
-  state.roundWinners.push(c);
-  state.score.set(c.id,(state.score.get(c.id)||0)+100*state.round);
-  state.answered++;
-  state.groupIndex++;
+function selectCharacter(winner) {
+  const group = state.currentGroup;
+  const winnerRating = state.rating.get(winner.id) || 1000;
+  const changes = new Map();
+  const k = state.phase === "screening" ? 20 : state.phase === "semifinal" ? 24 : 28;
+  const multiplier = 1 / Math.sqrt(Math.max(1, group.length - 1));
+
+  // Elo-like pairwise evidence from the single 4-way choice.
+  group.forEach(c => {
+    state.appearances.set(c.id, (state.appearances.get(c.id) || 0) + 1);
+    if (state.phase !== "screening") {
+      state.stageAppearances.set(c.id, (state.stageAppearances.get(c.id) || 0) + 1);
+    }
+    if (c.id === winner.id) return;
+    const otherRating = state.rating.get(c.id) || 1000;
+    const expected = 1 / (1 + Math.pow(10, (otherRating - winnerRating) / 400));
+    const delta = k * multiplier * (1 - expected);
+    changes.set(winner.id, (changes.get(winner.id) || 0) + delta);
+    changes.set(c.id, (changes.get(c.id) || 0) - delta);
+  });
+
+  for (let i = 0; i < group.length; i++) {
+    for (let j = i + 1; j < group.length; j++) {
+      const key = pairKey(group[i].id, group[j].id);
+      state.pairCounts.set(key, (state.pairCounts.get(key) || 0) + 1);
+    }
+  }
+  changes.forEach((delta, id) => state.rating.set(id, (state.rating.get(id) || 1000) + delta));
+  state.wins.set(winner.id, (state.wins.get(winner.id) || 0) + 1);
+  state.answered += 1;
+
+  if (state.phase === "screening") state.groupIndex += 1;
+  else state.stageChoices += 1;
   renderGroup();
 }
 
-function endRound() {
-  const winners=[...new Map(state.roundWinners.map(c=>[c.id,c])).values()];
-  if(winners.length<=9){
-    buildFinalRanking(winners);
-    return;
-  }
-  state.active=winners;
-  beginRound();
-}
-
-function buildFinalRanking(finalists) {
-  const finalistIds=new Set(finalists.map(c=>c.id));
-  const all=characters.map((c,i)=>({...c,id:i}));
-
-  const sorted=[...all].sort((a,b)=>{
-    const aFinal=finalistIds.has(a.id)?1:0;
-    const bFinal=finalistIds.has(b.id)?1:0;
-    if(aFinal!==bFinal) return bFinal-aFinal;
-
-    const roundDiff=(state.reachedRound.get(b.id)||0)-(state.reachedRound.get(a.id)||0);
-    if(roundDiff) return roundDiff;
-
-    const scoreDiff=(state.score.get(b.id)||0)-(state.score.get(a.id)||0);
-    if(scoreDiff) return scoreDiff;
-
-    return a.name.localeCompare(b.name,"ja");
-  });
-
-  state.result=sorted.slice(0,9);
+function buildFinalRanking() {
+  state.result = rankCandidates(state.pool).slice(0, 9);
   renderResult();
 }
 
 function renderResult() {
-  const box=$("ranking");
-  box.innerHTML="";
+  const box = $("ranking");
+  box.innerHTML = "";
+  const displayOrder = [3, 4, 5, 1, 0, 2, 6, 7, 8];
 
-  // スクショ風：4・5・6 / 2・1・3 / 7・8・9
-  const displayOrder=[3,4,5,1,0,2,6,7,8];
-
-  displayOrder.forEach(resultIndex=>{
-    const c=state.result[resultIndex];
-    if(!c) return;
-
-    const rank=resultIndex+1;
-    const el=document.createElement("article");
-    el.className=`rank rank-${rank}`;
-    el.dataset.rank=String(rank);
-
-    const work=c.work
-      ? `<div class="rank-work">${escapeHtml(c.work)}</div>`
-      : "";
-
-    el.innerHTML=`
-      <div class="rank-badge">${rank}位</div>
+  displayOrder.forEach(resultIndex => {
+    const c = state.result[resultIndex];
+    if (!c) return;
+    const rank = resultIndex + 1;
+    const el = document.createElement("article");
+    el.className = `rank rank-${rank}`;
+    el.dataset.rank = String(rank);
+    const work = c.work ? `<div class="rank-work">${escapeHtml(c.work)}</div>` : "";
+    el.innerHTML = `<div class="rank-badge">${rank}位</div>
       <div class="rank-media">${imageMarkup(c)}</div>
-      <div class="rank-body">
-        <div class="rank-name">${escapeHtml(c.name)}</div>
-        ${work}
-      </div>`;
-
+      <div class="rank-body"><div class="rank-name">${escapeHtml(c.name)}</div>${work}</div>`;
     box.appendChild(el);
   });
-
   show("result");
 }
+
 
 $("start-btn").addEventListener("click",startQuiz);
 $("restart-btn").addEventListener("click",()=>show("home"));
